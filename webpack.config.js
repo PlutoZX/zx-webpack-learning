@@ -68,12 +68,23 @@ const CleanPlugin = require("clean-webpack-plugin");
 
 // 当有不同的文件类型或不同的策略需要ExtractTextPlugin提取时，
 // 应该生成多个ExtractTextPlugin实例可以使用不同的配置，并且不同的ExtractTextPlugin的实例可以使用不同的loader
+// 震惊ExtractTextPlugin的配置项里的filename可以是function，通过默认传入的getPath方法，可以修改提取出的文件路径 可以加逻辑
 const extractCSS = new ExtractTextPlugin({
+    filename: function(getPath){
+        if(1){
+            var url = 'css/';
+            return getPath(url + '[name]_[contenthash:8].css');
+        }
+    },
+    allChunks: true, // 注意这里是true
+    disable: false
+});
+const extractLESS = new ExtractTextPlugin({
     filename: './css/[name]_[contenthash:8].css',
     allChunks: false,
     disable: false
 });
-const extractLESS = new ExtractTextPlugin({
+const extractSCSS = new ExtractTextPlugin({
     filename: './css/[name]_[contenthash:8].css',
     allChunks: false,
     disable: false
@@ -104,8 +115,15 @@ module.exports = {
             {
                 test: /\.less$/,
                 use: extractLESS.extract({
-                    fallback: "",
+                    fallback: "style-loader",
                     use: ['css-loader', 'less-loader']
+                })
+            },
+            {
+                test: /\.scss$/,
+                use: extractSCSS.extract({
+                    fallback: "style-loader",
+                    use: ['css-loader', 'sass-loader']
                 })
             }
         ]
@@ -113,6 +131,7 @@ module.exports = {
     plugins: [
         new CleanPlugin('dist'),
         extractCSS,
-        extractLESS
+        extractLESS,
+        extractSCSS
     ]
 };
