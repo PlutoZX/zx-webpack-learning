@@ -1,0 +1,1 @@
+import './storyMarket_v5.less';

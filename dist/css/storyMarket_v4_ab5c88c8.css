@@ -1,17 +1,8 @@
 body {
-  background-color: red;
-}
-div {
-  width: 10rem;
-}
-div .pop {
-  text-align: center;
-}
-div:hover {
-  cursor: pointer;
-}
-body {
   background-color: #F8F8F8;
+  color: red !important;
+  font-size: 16px;
+  margin: 0;
 }
 a:link,
 a:visited,
