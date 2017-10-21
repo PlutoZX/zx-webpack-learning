@@ -1,7 +1,7 @@
-const path = require('path');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const CleanPlugin = require("clean-webpack-plugin");
-
+const path = require('path'); // 操作路径如生成绝对路径
+const ExtractTextPlugin = require("extract-text-webpack-plugin"); // 用来提取单独的打包文件的
+const CleanWebpackPlugin = require("clean-webpack-plugin"); // 用来清除目录的
+const HtmlWebpackPlugin = require("html-webpack-plugin"); // 用来在html引入动态打包的文件 如有hash值文件
 
 
 
@@ -72,7 +72,7 @@ const CleanPlugin = require("clean-webpack-plugin");
 const extractCSS = new ExtractTextPlugin({
     filename: function(getPath){
         if(1){
-            var url = 'css/';
+            var url = '../css/';
             return getPath(url + '[name]_[contenthash:8].css');
         }
     },
@@ -80,12 +80,12 @@ const extractCSS = new ExtractTextPlugin({
     disable: false
 });
 const extractLESS = new ExtractTextPlugin({
-    filename: './css/[name]_[contenthash:8].css',
+    filename: '../css/[name]_[contenthash:8].css',
     allChunks: false,
     disable: false
 });
 const extractSCSS = new ExtractTextPlugin({
-    filename: './css/[name]_[contenthash:8].css',
+    filename: '../css/[name]_[contenthash:8].css',
     allChunks: false,
     disable: false
 });
@@ -101,7 +101,7 @@ module.exports = {
     },
     output: {
         filename: '[name]_[chunkhash:8].js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist/js')
     },
     module: {
         rules: [
@@ -129,7 +129,13 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanPlugin('dist'),
+        new CleanWebpackPlugin(['dist']), // 可以传入数组啊
+        new HtmlWebpackPlugin({ // 这个插件默认会生成一个新的index.html放到打包后的目录里，在这个html中会引用全部的入口文件，及入口文件中引入的文件，及入口文件抽离出来的文件
+            title: 'Output Management',
+            filename: '../../views/index_bundle.html', // 输出目录相对于output的输出目录
+            hash: true, // 它会给html引入的问价添加hash
+            chunks: ['index', 'storyMarket_v4']
+        }),
         extractCSS,
         extractLESS,
         extractSCSS
