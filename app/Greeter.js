@@ -1,5 +1,20 @@
-module.exports = function(){
-    let greet = document.createElement("div");
-    greet.textContent = "在想着想着在线咨询在线咨询在线咨询在线咨询";
-    return greet;
-};
+import config from "./config.json";
+import React, {Component} from 'react';
+
+
+class Greeter extends Component {
+    render(){
+        return (
+            <div>
+                {config.greetText}
+            </div>
+        );
+
+
+    }
+}
+
+
+
+
+export default Greeter;
