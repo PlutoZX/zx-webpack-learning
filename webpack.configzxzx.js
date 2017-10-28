@@ -170,6 +170,7 @@ const extractSCSS = new ExtractTextPlugin({
     disable: false
 });
 module.exports = {
+    devtool: 'inline-source-map',
     entry: {
         'another': './src/js/another-module.js', // 一个额外的模块，它里面也依赖lodash和index一样，不用CommonsChunkPlugin的话，相同的依赖会被打包两次
         'index': './src/js/index.js',
@@ -182,7 +183,6 @@ module.exports = {
         filename: '[name]_[chunkhash:8].js',
         path: path.resolve(__dirname, 'dist/js')
     },
-    devtool: 'inline-source-map',
     devServer: {
         contentBase: './views'
     },
