@@ -17,13 +17,13 @@ module.exports = {
                 test: /(\.jsx|\.js)$/,
                 use: {
                     loader: "babel-loader",
-                    options: {
-                        presets: [
-                            "es2015", "react"
-                        ]
-                    }
                 },
                 exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader','css-loader']
+                // use: ['css-loader', 'style-loader'] // 这个就会报错说明，loader加载器有顺序之分
             }
         ]
     }
