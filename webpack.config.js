@@ -22,8 +22,22 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader','css-loader']
+                // use: ['style-loader','css-loader'] // 这种简单的写成loader名数组的方式虽然简单但是有个问题，不能对单独的loader进行配置
                 // use: ['css-loader', 'style-loader'] // 这个就会报错说明，loader加载器有顺序之分
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader'
+                    }
+                ]
             }
         ]
     }
