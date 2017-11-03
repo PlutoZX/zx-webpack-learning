@@ -31,7 +31,10 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true
+                            modules: true, // 启用css module
+                            localIdentName: '[path][name]__[local]-[hash:base64:5]', // css module 中类名的命名格式，path是该css文件所在目录，name是css文件名，local是该类名在css文件中的本名，hash是hash值
+                            minimize: true,
+                            sourceMap: true
                         }
                     },
                     {

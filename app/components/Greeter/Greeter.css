@@ -1,0 +1,13 @@
+body {
+
+}
+.p1, .input1 {
+    width: 500px;
+    font-size: 20px;
+    color: #a375ff;
+    min-height: 30px;
+}
+
+.input1 {
+    color: #74ff1c;
+}
