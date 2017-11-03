@@ -1,3 +1,10 @@
-.basebody {
+.basebody1{
     font-style: italic;
 }
+
+.basebody2 {
+    text-decoration: underline;
+}
+
+
+/*别的css通过composes来组合的时候需要类名，个人看来灵活性不够，如果想引入有层级关系的类，目前不知道怎么搞*/

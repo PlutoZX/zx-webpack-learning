@@ -1,5 +1,5 @@
 .base {
-    composes: basebody from '../BaseCSS/BaseCSS.css'; /*利用compose来组合其他css module的样式 需要类名和路径*/
+    composes: basebody1 basebody2 from '../BaseCSS/BaseCSS.css'; /*利用compose来组合其他css module的样式 需要类名和路径*/
     width: 500px;
     font-size: 20px;
     min-height: 30px;
