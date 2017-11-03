@@ -1,13 +1,21 @@
-body {
-
-}
-.p1, .input1 {
+.base {
+    composes: basebody from '../BaseCSS/BaseCSS.css'; /*利用compose来组合其他css module的样式 需要类名和路径*/
     width: 500px;
     font-size: 20px;
-    color: #a375ff;
     min-height: 30px;
+    border: 1px solid #ff252d;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+
+.p1, .input1 {
+    composes: base;  /*利用composes来组合样式*/
+    color: #a375ff;
 }
 
 .input1 {
+    composes: base;
     color: #74ff1c;
 }

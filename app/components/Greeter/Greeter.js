@@ -4,7 +4,6 @@ import styles from './Greeter.css';
 
 class Greeter extends Component {
 
-
     handleClick(){
         console.log(styles.toString());
         alert(1);
