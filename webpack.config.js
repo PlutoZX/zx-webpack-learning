@@ -67,7 +67,8 @@ module.exports = {
         ? [
             new ExtractTextPlugin({
                 filename: '[name].css'
-            })
+            }),
+            new webpack.BannerPlugin('版权赵旋所有，欢迎翻版')
         ]
         : []
 };
