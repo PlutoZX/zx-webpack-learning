@@ -1,4 +1,5 @@
 const env = process.env.NODE_ENV;
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
@@ -68,7 +69,7 @@ module.exports = {
             new ExtractTextPlugin({
                 filename: '[name].css'
             }),
-            new webpack.BannerPlugin('版权赵旋所有，欢迎翻版')
+            new webpack.BannerPlugin('版权赵旋所有，我也是抄别人的学习中，欢迎翻版') // 这种插件webpack内置可以直接用不需要npm i 但是需要require(webpack)
         ]
         : []
 };

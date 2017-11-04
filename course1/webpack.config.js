@@ -1,8 +1,10 @@
 const path = require('path'); // 操作路径如生成绝对路径
-const ExtractTextPlugin = require("extract-text-webpack-plugin"); // 用来提取单独的打包文件的
-const CleanWebpackPlugin = require("clean-webpack-plugin"); // 用来清除目录的
-const HtmlWebpackPlugin = require("html-webpack-plugin"); // 用来在html引入动态打包的文件 如有hash值文件
+const ExtractTextPlugin = require("extract-text-webpack-plugin"); // 用来提取单独的打包文件的插件
+const CleanWebpackPlugin = require("clean-webpack-plugin"); // 用来清除目录的插件
+const HtmlWebpackPlugin = require("html-webpack-plugin"); // 用来在html引入动态打包的文件 如有hash值文件的插件
 
+// webpack认为一切皆模块 但是webpack本身只认识js 所以loader的作用就是使webpack可以认识别的类型文件css，sass，less，img 使webpack可以按模块的方式处理它们
+// plugin则是在webpack整个构建过程中都起作用的 拓展webpack功能的插件
 
 // module.exports = {
 //     entry: './src/index.js',
@@ -172,12 +174,12 @@ const extractSCSS = new ExtractTextPlugin({
 module.exports = {
     devtool: 'inline-source-map',
     entry: {
-        'another': './src/js/another-module.js', // 一个额外的模块，它里面也依赖lodash和index一样，不用CommonsChunkPlugin的话，相同的依赖会被打包两次
-        'index': './src/js/index.js',
-        'storyMarket_v4': './src/less/entry_storyMarket_v4.js',
-        'storyMarket_v5': './src/less/entry_storyMarket_v5.js',
-        'storyMarket_v6': './src/less/entry_storyMarket_v6.js',
-        'zx': './src/css/entry_zx.js'
+        another: './src/js/another-module.js', // 一个额外的模块，它里面也依赖lodash和index一样，不用CommonsChunkPlugin的话，相同的依赖会被打包两次
+        index: './src/js/index.js',
+        storyMarket_v4: './src/less/entry_storyMarket_v4.js',
+        storyMarket_v5: './src/less/entry_storyMarket_v5.js',
+        storyMarket_v6: './src/less/entry_storyMarket_v6.js',
+        zx: './src/css/entry_zx.js'
     },
     output: {
         filename: '[name]_[chunkhash:8].js',
