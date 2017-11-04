@@ -3,3 +3,5 @@
 
 # dependencies
 /node_modules
+./course1/node_modules
+./course2/node_modules
