@@ -69,10 +69,11 @@ module.exports = {
         storyMarket_v6: './src/less/storyMarket_v6.less',
         another: './src/js/another-module.js', // 一个额外的模块，它里面也依赖lodash和index一样，不用CommonsChunkPlugin的话，相同的依赖会被打包两次
         index: './src/js/index.js',
-        zx: './src/css/zx.css'
+        zx: './src/css/zx.css' // 单独在配置文件里引入的css，如果不extract，会合并到js里，并且在html里引入js后不会在head里的style里的添加对应的样式，
     },
     output: {
-        filename: '[name]_[chunkhash:8].js',
+        // filename: '[name]_[chunkhash:8].js',
+        filename: '[name]_bundle.js',
         path: path.resolve(__dirname, 'dist/js')
     },
     devServer: {
@@ -82,17 +83,11 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use: extractCSS.extract({
-                    fallback: "style-loader",
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                minimize: true
-                            }
-                        }
-                    ]
-                })
+                use: [{
+                    loader: 'style-loader'
+                },{
+                    loader: 'css-loader'
+                }]
             },
             {
                 test: /\.less$/,
