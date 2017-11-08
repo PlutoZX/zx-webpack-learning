@@ -24,6 +24,6 @@
     "js": "common.js"
   },
   "metadata": {
-    "version": 130
+    "explain": "根据生成的json文件看，js只有一个打包的js，而less则生成了一个js和一个css，并且具体的对应关系都会放入json文件里"
   }
 }

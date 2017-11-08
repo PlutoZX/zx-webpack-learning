@@ -62,7 +62,7 @@ const extraneousfilecleanplugin = new ExtraneousFileCleanPlugin({
     extensions: ['.js']
 });
 const assetsPluginInstance = new AssetsWebpackPlugin({
-    filename: 'manifest.json',
+    filename: 'assets.json',
     fullPath: true,
     includeManifest: 'manifest',
     path: path.resolve(__dirname, 'dist'),
