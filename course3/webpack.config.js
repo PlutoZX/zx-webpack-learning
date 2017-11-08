@@ -11,6 +11,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin"); // 用来提�
 const CleanWebpackPlugin = require("clean-webpack-plugin"); // 用来清除目录的插件
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'); // 用来优化压缩css （解决extract-text-webpack-plugin的css复制问题，不明白什么意思）
 const ExtraneousFileCleanPlugin = require('webpack-extraneous-file-cleanup-plugin'); // 用来提取分离的css文件后，删除生成的对应的多余的css打包的js模块
+const AssetsWebpackPlugin = require('assets-webpack-plugin');
 
 // webpack使用插件需要实例化，因为可能在多处调用，所以每次使用都需要实例化，实例化的时候可以传入配置参数，但是如果都写在plugins数组里会看起来很乱，可以把实例化写在外面，用变量存储，plugins里调用的时候直接传入变量，这样好看点而且好加注释
 const cleanDist = new CleanWebpackPlugin(['dist']);
@@ -60,6 +61,16 @@ const optimizeCSSwithprocessor = new OptimizeCssAssetsPlugin({
 const extraneousfilecleanplugin = new ExtraneousFileCleanPlugin({
     extensions: ['.js']
 });
+const assetsPluginInstance = new AssetsWebpackPlugin({
+    filename: 'manifest.json',
+    fullPath: true,
+    includeManifest: 'manifest',
+    path: path.resolve(__dirname, 'dist'),
+    prettyPrint: true,
+    metadata: {
+        explain: '根据生成的json文件看，js只有一个打包的js，而less则生成了一个js和一个css，并且具体的对应关系都会放入json文件里'
+    }
+});
 
 module.exports = {
     devtool: 'inline-source-map',
@@ -69,7 +80,7 @@ module.exports = {
         storyMarket_v6: './src/less/storyMarket_v6.less',
         another: './src/js/another-module.js', // 一个额外的模块，它里面也依赖lodash和index一样，不用CommonsChunkPlugin的话，相同的依赖会被打包两次
         index: './src/js/index.js',
-        zx: './src/css/zx.css' // 单独在配置文件里引入的css，如果不extract，会合并到js里，并且在html里引入js后不会在head里的style里的添加对应的样式，
+        zx: './src/css/zx.css' // 不管是单独配置的css还是js文件里import的css，如果不extract，会合并到js里，并且在html里引入js后不会在head里的style里的添加对应的样式，
     },
     output: {
         // filename: '[name]_[chunkhash:8].js',
@@ -82,7 +93,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
+                test: /\.css$/, // 注意这里对css处理时没有extract
                 use: [{
                     loader: 'style-loader'
                 },{
@@ -109,6 +120,12 @@ module.exports = {
                     fallback: "style-loader",
                     use: ['css-loader', 'sass-loader']
                 })
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [{
+                        loader: 'file-loader'
+                }]
             }
         ]
     },
@@ -119,6 +136,7 @@ module.exports = {
         extractLESS,
         extractSCSS,
         shareChunk,
+        assetsPluginInstance,
         // optimizeCSSwithprocessor,
         // extraneousfilecleanplugin 有问题会报错
     ]

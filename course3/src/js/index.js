@@ -3,6 +3,8 @@ import printMe from './print';
 
 import '../css/zximport.css';
 
+import Icon from '../img/visa_logo.png';
+
 function component() {
     var element = document.createElement('div');
     var btn = document.createElement('button');
@@ -13,6 +15,10 @@ function component() {
     btn.onclick = printMe;
 
     element.appendChild(btn);
+
+    var myIcon = new Image();
+    myIcon.src = Icon;
+    element.appendChild(myIcon);
 
     return element;
 }

@@ -1,0 +1,29 @@
+{
+  "index": {
+    "js": "index_bundle.js"
+  },
+  "zx": {
+    "js": "zx_bundle.js"
+  },
+  "another": {
+    "js": "another_bundle.js"
+  },
+  "storyMarket_v6": {
+    "js": "storyMarket_v6_bundle.js",
+    "css": "../css/storyMarket_v6_c33a073f.css"
+  },
+  "storyMarket_v5": {
+    "js": "storyMarket_v5_bundle.js",
+    "css": "../css/storyMarket_v5_490fc36d.css"
+  },
+  "storyMarket_v4": {
+    "js": "storyMarket_v4_bundle.js",
+    "css": "../css/storyMarket_v4_490fc36d.css"
+  },
+  "lalala": {
+    "js": "common.js"
+  },
+  "metadata": {
+    "version": 130
+  }
+}
